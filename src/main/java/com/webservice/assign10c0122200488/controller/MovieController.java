@@ -33,13 +33,13 @@ public class MovieController {
 
     @GetMapping("/desc")
     public List<MovieResponse> getAllMoviesOrderByReleaseYear() {return movieService.getAllMoviesOrderByReleaseYear();}
-//
-//    @GetMapping("")
-//    public List<MovieResponse> getMoviesByCategory(@RequestParam String category){return movieService.getMoviesByCategory(category);}
-//
-//    @GetMapping("")
-//    public List<MovieResponse> getMoviesByReleaseYearAndRating(@RequestParam Integer releaseYear, @RequestParam Double rating){
-//        return  movieService.getMoviesByReleaseYearAndRating(releaseYear,rating);}
+
+    @GetMapping("/category")
+    public List<MovieResponse> getMoviesByCategory(@RequestParam String category){return movieService.getMoviesByCategory(category);}
+
+    @GetMapping("/search")
+    public List<MovieResponse> getMoviesByReleaseYearAndRating(@RequestParam(required = false) Integer releaseYear, @RequestParam(required = false) Double rating){
+        return  movieService.getMoviesByReleaseYearAndRating(releaseYear,rating);}
 
     @GetMapping("/{id}")
     public MovieResponse getMovieById(@PathVariable Long id){

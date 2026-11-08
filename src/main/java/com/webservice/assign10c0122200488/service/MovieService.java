@@ -47,7 +47,10 @@ public class MovieService {
     }
 
     public List<MovieResponse> getMoviesByReleaseYearAndRating(Integer releaseYear, Double rating){
-        return movieRepository.findByReleaseYearGreaterThanEqualAndRatingGreaterThanEqual(releaseYear, rating)
+        int minYear = (releaseYear != null) ? releaseYear : Integer.MIN_VALUE;
+        double minRating = (rating != null) ? rating : -Double.MAX_VALUE;
+
+        return movieRepository.findByReleaseYearGreaterThanEqualAndRatingGreaterThanEqual(minYear, minRating)
                 .stream().map(MovieResponse::from).toList();
     }
 

@@ -7,16 +7,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-/*객체와 DB 테이블의 매핑을 담당 하는 클래스*/
+/* 객체와 DB 테이블 간의 매핑을 담당하는 클래스 */
 @Entity
+/* Movie 클래스를 데이터베이스의 movies 테이블로 매핑 */
 @Table(name = "movies")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@EntityListeners(AutoCloseable.class)
+@EntityListeners(AuditingEntityListener.class)
 public class Movie {
     /* 테이블의 기본 키(PK)로 지정 */
     @Id
@@ -44,18 +46,6 @@ public class Movie {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
-
-    @PrePersist
-    public void prePersist(){
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void preUpdate(){
-        updatedAt = LocalDateTime.now();
-    }
-
 
     public Movie(MovieRequest movieRequest){
         this.title = movieRequest.title();
