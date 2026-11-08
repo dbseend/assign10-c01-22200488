@@ -56,6 +56,7 @@ public class Movie {
         updatedAt = LocalDateTime.now();
     }
 
+
     public Movie(MovieRequest movieRequest){
         this.title = movieRequest.title();
         this.director = movieRequest.director();

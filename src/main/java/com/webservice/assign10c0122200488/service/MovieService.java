@@ -8,7 +8,6 @@ import com.webservice.assign10c0122200488.repository.MovieRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -48,10 +47,7 @@ public class MovieService {
     }
 
     public List<MovieResponse> getMoviesByReleaseYearAndRating(Integer releaseYear, Double rating){
-        int minYear = (releaseYear != null) ? releaseYear : 1900;
-        double minRating = (rating != null) ? rating : 0.0;
-
-        return movieRepository.findByReleaseYearGreaterThanEqualAndRatingGreaterThanEqual(minYear, minRating)
+        return movieRepository.findByReleaseYearGreaterThanEqualAndRatingGreaterThanEqual(releaseYear, rating)
                 .stream().map(MovieResponse::from).toList();
     }
 
