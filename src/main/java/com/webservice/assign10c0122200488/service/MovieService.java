@@ -5,8 +5,8 @@ import com.webservice.assign10c0122200488.dto.MovieRequest;
 import com.webservice.assign10c0122200488.dto.MovieResponse;
 import com.webservice.assign10c0122200488.exception.MovieNotFoundException;
 import com.webservice.assign10c0122200488.repository.MovieRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
