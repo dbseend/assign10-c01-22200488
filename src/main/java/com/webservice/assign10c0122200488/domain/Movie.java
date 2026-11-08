@@ -10,7 +10,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
-/* 객체와 DB 테이블의 매핑을 담당 하는 클래스*/
+/*객체와 DB 테이블의 매핑을 담당 하는 클래스*/
 @Entity
 @Table(name = "movies")
 @NoArgsConstructor

@@ -1,10 +1,10 @@
 # 웹 서비스 개발 9주차 과제 - Spring Data JPA + MariaDB REST CRUD (Render 배포)
 
-| 구분 | 링크 |
-| :--- | :--- |
-| **Render 배포 URL** | https://assign09-c01-22200488-1.onrender.com |
+| 구분 | 링크                                                         |
+| :--- |:-----------------------------------------------------------|
+| **Render 배포 URL** | https://assign10-c01-22200488-1.onrender.com               |
 | GitHub (Organization) | https://github.com/2026-2-WebService/assign09-c01-22200488 |
-| GitHub (Personal) | https://github.com/dbseend/assign09-c01-22200488 |
+| GitHub (Personal) | https://github.com/dbseend/assign10-c01-22200488           |
 
 ---
 
