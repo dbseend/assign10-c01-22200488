@@ -1,10 +1,11 @@
-package com.webservice.assign09c0122200488.service;
+package com.webservice.assign10c0122200488.service;
 
-import com.webservice.assign09c0122200488.domain.Movie;
-import com.webservice.assign09c0122200488.dto.MovieRequest;
-import com.webservice.assign09c0122200488.dto.MovieResponse;
-import com.webservice.assign09c0122200488.exception.MovieNotFoundException;
-import com.webservice.assign09c0122200488.repository.MovieRepository;
+import com.webservice.assign10c0122200488.domain.Movie;
+import com.webservice.assign10c0122200488.dto.MovieRequest;
+import com.webservice.assign10c0122200488.dto.MovieResponse;
+import com.webservice.assign10c0122200488.exception.MovieNotFoundException;
+import com.webservice.assign10c0122200488.repository.MovieRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,10 @@ public class MovieService {
     public MovieResponse addMovie(MovieRequest movieRequest){
         validate(movieRequest);
 
+        /*
+        Q7. save()를 호출하면 새로운 데이터 등록과 기존 데이터 수정이 어떻게 처리되는가?
+        - save() 호출 시 데이터의 신규성을 먼저 검사한 후, 신규 데이터는 새로 등록(Insert)하고 기존 데이터는 수정된 내용을 업데이트(Update) 진행
+        */
         Movie newMovie = movieRepository.save(new Movie(movieRequest));
 
         return MovieResponse.from(newMovie);
@@ -36,6 +41,27 @@ public class MovieService {
                 .orElseThrow(() -> new MovieNotFoundException(id));
     }
 
+    public List<MovieResponse> getMoviesByCategory(String category){
+        return movieRepository.findByCategory(category)
+                .stream().map(MovieResponse::from).toList();
+    }
+
+    public List<MovieResponse> getMoviesByReleaseYearAndRating(Integer releaseYear, Double rating){
+        return movieRepository.findByReleaseYearGreaterThanEqualAndRatingGreaterThanEqual(releaseYear, rating)
+                .stream().map(MovieResponse::from).toList();
+    }
+
+    public List<MovieResponse> getAllMoviesOrderByReleaseYear(){
+        return movieRepository.findAllByOrderByReleaseYearDesc().stream().map(MovieResponse::from).toList();
+    }
+
+    /*
+    Q8. @Transactional과 Dirty Checking은 어떤 관계가 있는가?
+	- Dirty Checking은 엔티티의 변경을 감지해 UPDATE 쿼리를 자동 실행하는 기능
+	- 엔티티의 변경을 감지하려면 엔티티가 영속성 컨텍스트에 살아있어야함
+	- @Transactional은 메서드 내의 데이터베이스 처리를 하나의 단위로 묶어 영속성 컨텍스트의 생명주기를 메서드가 끝날 때까지 유지해 Dirty Checking을 가능하게 함
+    */
+    @Transactional
     public MovieResponse updateMovieById(Long id, MovieRequest movieRequest){
         Movie targetMovie = movieRepository.findById(id)
                 .orElseThrow(() -> new MovieNotFoundException(id));
@@ -44,7 +70,7 @@ public class MovieService {
 
         targetMovie.update(movieRequest);
 
-        return MovieResponse.from(movieRepository.save(targetMovie));
+        return MovieResponse.from(targetMovie);
     }
 
     public void deleteMovieById(Long id){

@@ -1,4 +1,4 @@
-package com.webservice.assign09c0122200488.exception;
+package com.webservice.assign10c0122200488.exception;
 
 public class MovieNotFoundException extends RuntimeException {
 

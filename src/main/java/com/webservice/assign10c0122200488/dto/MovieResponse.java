@@ -1,6 +1,6 @@
-package com.webservice.assign09c0122200488.dto;
+package com.webservice.assign10c0122200488.dto;
 
-import com.webservice.assign09c0122200488.domain.Movie;
+import com.webservice.assign10c0122200488.domain.Movie;
 
 public record MovieResponse(
         Long id,

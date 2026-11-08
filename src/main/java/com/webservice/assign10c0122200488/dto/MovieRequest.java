@@ -1,4 +1,4 @@
-package com.webservice.assign09c0122200488.dto;
+package com.webservice.assign10c0122200488.dto;
 
 public record MovieRequest(
         String title,

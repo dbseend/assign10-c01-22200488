@@ -1,4 +1,4 @@
-package com.webservice.assign09c0122200488.exception;
+package com.webservice.assign10c0122200488.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
